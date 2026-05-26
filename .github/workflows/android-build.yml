@@ -27,22 +27,21 @@ jobs:
 
     - name: Install Android NDK & CMake
       run: |
-        sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
+        sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1" --sdk_root=$ANDROID_SDK_ROOT
+        
+    - name: Create local.properties
+      run: |
+        echo "sdk.dir=$ANDROID_SDK_ROOT" > local.properties
+        echo "ndk.dir=$ANDROID_SDK_ROOT/ndk/25.1.8937393" >> local.properties
 
     - name: Grant Execute Permissions
       run: chmod +x gradlew
 
-    - name: Build Debug & Release APKs
-      run: ./gradlew assembleDebug assembleRelease
+    - name: Build Debug APK
+      run: ./gradlew assembleDebug --no-daemon --stacktrace
 
     - name: Upload Compiled Debug APK
       uses: actions/upload-artifact@v4
       with:
         name: AuraCam-Debug-APK
         path: app/build/outputs/apk/debug/app-debug.apk
-
-    - name: Upload Compiled Release APK (Unsigned)
-      uses: actions/upload-artifact@v4
-      with:
-        name: AuraCam-Release-Unsigned-APK
-        path: app/build/outputs/apk/release/app-release-unsigned.apk
