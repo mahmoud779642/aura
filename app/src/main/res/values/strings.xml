@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AuraCam</string>
+    <string name="permission_rationale">AuraCam needs Camera and Storage permissions to capture and process professional-grade photographs on your Samsung Galaxy A16.</string>
+    <string name="shutter_desc">Tactile shutter button</string>
+    <string name="thermal_warning">Warning: Device is warm. Computational pipelines scaled down for stability.</string>
+</resources>
