@@ -25,19 +25,15 @@ jobs:
     - name: Set up Android SDK
       uses: android-actions/setup-android@v3
 
-    # On a clean repo without Android Studio wrapper, we generate the wrapper inside the cloud environment
-    - name: Generate Gradle Wrapper
-      run: gradle wrapper --gradle-version 8.2
-
     - name: Install Android NDK & CMake
       run: |
         sdkmanager --install "ndk;25.1.8937393" "cmake;3.22.1"
 
-    - name: Grant Execute Permissions to Gradlew
+    - name: Grant Execute Permissions
       run: chmod +x gradlew
 
     - name: Build Debug & Release APKs
-      run: ./gradlew assembleDebug assembleRelease --info --stacktrace
+      run: ./gradlew assembleDebug assembleRelease
 
     - name: Upload Compiled Debug APK
       uses: actions/upload-artifact@v4
